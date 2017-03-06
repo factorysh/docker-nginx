@@ -14,7 +14,6 @@ RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Unroot image stuff
 RUN touch /var/run/nginx.pid
-RUN touch /var/run/nginx.pid
 RUN chown -R www-data:www-data /var/run/nginx.pid /var/lib/nginx
 
 # Specify dedicated user, www-data
