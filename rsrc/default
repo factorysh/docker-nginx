@@ -40,6 +40,12 @@ server {
 		try_files $uri $uri/ =404;
 	}
 
+    # gzip stuff
+	gzip_static  on;
+
+	gzip_types image/svg+xml text/css application/javascript application/json;
+
+
 	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
 	#
 	#location ~ \.php$ {
