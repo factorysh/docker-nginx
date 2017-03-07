@@ -40,7 +40,7 @@ server {
 		try_files $uri $uri/ =404;
 	}
 
-    # gzip stuff
+	# gzip stuff
 	gzip_static  on;
 
 	gzip_types image/svg+xml text/css application/javascript application/json;
