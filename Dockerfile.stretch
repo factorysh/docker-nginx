@@ -1,6 +1,6 @@
 # Nginx
 # select image
-FROM bearstech/debian:jessie
+FROM bearstech/debian:stretch
 
 # install nginx
 RUN apt-get update && \
