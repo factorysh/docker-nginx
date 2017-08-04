@@ -1,7 +1,7 @@
 all: jessie stretch latest 
 
 jessie: 
-	docker build -t bearstech/$@:jessie -f Dockerfile.$@ . 
+	docker build -t bearstech/nginx:$@ -f Dockerfile.$@ . 
 
 stretch:
 	docker build -t bearstech/nginx:$@ -f Dockerfile.$@ . 
