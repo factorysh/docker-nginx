@@ -1,0 +1,9 @@
+---
+
+http:
+    http://web:8000/:
+        status: 200
+        no-follow-redirects: false
+        timeout: 1000
+        body:
+            - /.*Hello world.*/
