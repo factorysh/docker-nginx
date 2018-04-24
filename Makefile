@@ -30,10 +30,10 @@ bin/goss:
 	chmod +x bin/goss
 
 test: bin/goss
-	@docker-compose -f tests/docker-compose.yml down || true
-	@docker-compose -f tests/docker-compose.yml up -d
-	@docker-compose -f tests/docker-compose.yml exec goss \
+	docker-compose -f tests/docker-compose.yml down || true
+	docker-compose -f tests/docker-compose.yml up -d
+	docker-compose -f tests/docker-compose.yml exec goss \
 		goss -g nginx.yaml validate --max-concurrent 4 --format documentation
-	@docker-compose -f tests/docker-compose.yml down || true
+	docker-compose -f tests/docker-compose.yml down || true
 
 tests: test
