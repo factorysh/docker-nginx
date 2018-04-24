@@ -1,6 +1,12 @@
 GOSS_VERSION := 0.3.5
 
-all: jessie stretch
+all: pull build
+
+pull:
+	docker pull bearstech/debian:stretch
+	docker pull bearstech/debian:jessie
+
+build: jessie stretch
 
 jessie:
 	docker build -t bearstech/nginx:1.6 -f Dockerfile.$@ .
@@ -30,3 +36,4 @@ test: bin/goss
 		goss -g nginx.yaml validate --max-concurrent 4 --format documentation
 	@docker-compose -f tests/docker-compose.yml down || true
 
+tests: test
