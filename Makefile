@@ -26,6 +26,8 @@ bin/goss:
 	chmod +x bin/goss
 
 test: bin/goss
+	# this fixes the input device is not a TTY .. see https://github.com/docker/compose/issues/5696
+	export COMPOSE_INTERACTIVE_NO_CLI=1
 	docker-compose -f tests/docker-compose.yml down || true
 	docker-compose -f tests/docker-compose.yml up -d
 	docker-compose -f tests/docker-compose.yml exec goss \
