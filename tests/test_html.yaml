@@ -1,8 +1,7 @@
 ---
 
 http:
-    http://web:8000/:
+    http://web:8000/test.html:
         status: 200
         no-follow-redirects: false
         timeout: 1000
-        body: ["<b>Hello world</b>"]
