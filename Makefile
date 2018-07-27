@@ -9,10 +9,10 @@ pull:
 build: jessie stretch
 
 jessie:
-	docker build -t bearstech/nginx:1.6 -f Dockerfile.$@ .
+	docker build -t bearstech/nginx:1.6 --build-arg DEBIAN_DISTRO=jessie .
 
 stretch:
-	docker build -t bearstech/nginx:1.10 -f Dockerfile.$@ .
+	docker build -t bearstech/nginx:1.10 --build-arg DEBIAN_DISTRO=stretch .
 	docker tag bearstech/nginx:1.10 bearstech/nginx:latest
 
 push:
