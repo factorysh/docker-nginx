@@ -1,4 +1,4 @@
-ARG DEBIAN_DISTRO=stretch
+ARG DEBIAN_DISTRO
 FROM bearstech/debian:${DEBIAN_DISTRO}
 
 RUN set -eux \
