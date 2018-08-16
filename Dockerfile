@@ -22,5 +22,7 @@ COPY ./files/nginx.conf /etc/nginx/nginx.conf
 COPY ./files/default /etc/nginx/sites-enabled/
 COPY ./files/test.html /var/www/html/
 
+EXPOSE 8000
+
 # nginx command
 CMD ["nginx", "-g", "daemon off;"]
