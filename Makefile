@@ -20,6 +20,11 @@ push:
 	docker push bearstech/nginx:1.10
 	docker push bearstech/nginx:latest
 
+remove_image:
+	docker rmi bearstech/nginx:1.6
+	docker rmi bearstech/nginx:1.10
+	docker rmi bearstech/nginx:latest
+
 bin/goss:
 	mkdir -p bin
 	curl -o bin/goss -L https://github.com/aelsabbahy/goss/releases/download/v${GOSS_VERSION}/goss-linux-amd64
