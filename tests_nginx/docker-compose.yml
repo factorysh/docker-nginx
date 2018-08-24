@@ -5,7 +5,7 @@ services:
     web:
         image: bearstech/nginx
         volumes:
-            - ../tests/index.html:/var/www/html/index.html
+            - ../tests_nginx/index.html:/var/www/html/index.html
         ports:
             - '8000:8000'
 
@@ -14,7 +14,7 @@ services:
         command: "sleep 600000000000000000000000"
         volumes:
             - ../bin/goss:/usr/bin/goss
-            - ../tests:/goss
+            - ../tests_nginx:/goss
         working_dir: /goss
         links:
             - web
