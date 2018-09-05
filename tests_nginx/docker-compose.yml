@@ -4,6 +4,8 @@ version: '3'
 services:
     traefik:
         image: bearstech/traefik-dev
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
         links:
             - web
 
@@ -16,6 +18,8 @@ services:
             - '8000'
         links:
             - mirror
+        labels:
+            traefik.frontend.rule: Host:traefik,glasses
 
     mirror:
         image: bearstech/http-mirror
@@ -29,4 +33,4 @@ services:
         links:
             - web
             - traefik
-            - web:glasses
+            - traefik:glasses

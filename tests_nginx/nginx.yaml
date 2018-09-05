@@ -3,3 +3,4 @@
 gossfile:
     test_index_html.yaml: {}
     test_html.yaml: {}
+    test_traefik.yaml: {}
