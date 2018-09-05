@@ -2,6 +2,11 @@
 
 version: '3'
 services:
+    traefik:
+        image: bearstech/traefik-dev
+        links:
+            - web
+
     web:
         image: bearstech/nginx
         volumes:
@@ -9,12 +14,12 @@ services:
         ports:
             - '8000:8000'
 
-    goss:
+    client:
         image: bearstech/debian:stretch
-        command: "sleep 600000000000000000000000"
         volumes:
             - ../bin/goss:/usr/bin/goss
             - ../tests_nginx:/goss
         working_dir: /goss
         links:
             - web
+            - traefik
