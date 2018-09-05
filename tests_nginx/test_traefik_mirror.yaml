@@ -1,0 +1,12 @@
+---
+
+http:
+    http://glasses/beuha/aussi:
+        status: 200
+        no-follow-redirects: false
+        timeout: 1000
+        body:
+            - '"Beuha":"aussi"'
+            - '"X-Forwarded-Host":"glasses"'
+            - '"X-Forwarded-For":'
+
