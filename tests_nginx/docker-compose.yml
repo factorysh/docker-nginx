@@ -10,9 +10,15 @@ services:
     web:
         image: bearstech/nginx
         volumes:
-            - ../tests_nginx/index.html:/var/www/html/index.html
+            - ./index.html:/var/www/html/index.html
+            - ./nginx_mirror.conf:/etc/nginx/sites-enabled/mirror
         ports:
-            - '8000:8000'
+            - '8000'
+        links:
+            - mirror
+
+    mirror:
+        image: bearstech/http-mirror
 
     client:
         image: bearstech/debian:stretch
@@ -23,3 +29,4 @@ services:
         links:
             - web
             - traefik
+            - web:glasses
