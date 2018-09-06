@@ -32,6 +32,7 @@ bin/goss:
 
 test: bin/goss
 	docker-compose -f tests_nginx/docker-compose.yml down || true
+	rm -rf tests_nginx/data/log
 	docker-compose -f tests_nginx/docker-compose.yml up -d traefik
 	sleep 1
 	docker-compose -f tests_nginx/docker-compose.yml run -T client \

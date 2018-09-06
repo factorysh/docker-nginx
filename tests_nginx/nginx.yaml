@@ -5,3 +5,4 @@ gossfile:
     test_html.yaml: {}
     test_traefik.yaml: {}
     test_traefik_mirror.yaml: {}
+    test_log.yaml: {}

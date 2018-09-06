@@ -16,6 +16,7 @@ services:
         volumes:
             - ./index.html:/var/www/html/index.html
             - ./nginx_mirror.conf:/etc/nginx/sites-enabled/mirror
+            - ./data/log:/var/log/nginx
         ports:
             - '8000'
         links:
@@ -31,6 +32,7 @@ services:
         volumes:
             - ../bin/goss:/usr/bin/goss
             - ../tests_nginx:/goss
+            - ./data/log:/data/log
         working_dir: /goss
         links:
             - web
