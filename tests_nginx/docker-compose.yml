@@ -8,6 +8,8 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
         links:
             - web
+        ports:
+            - 80
 
     web:
         image: bearstech/nginx
