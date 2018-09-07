@@ -30,9 +30,13 @@ bin/goss:
 	curl -o bin/goss -L https://github.com/aelsabbahy/goss/releases/download/v${GOSS_VERSION}/goss-linux-amd64
 	chmod +x bin/goss
 
-test: bin/goss
+tests_nginx/data:
+	mkdir -p tests_nginx/data
+	chmod 777 tests_nginx/data
+
+test: bin/goss tests_nginx/data
 	docker-compose -f tests_nginx/docker-compose.yml down || true
-	rm -rf tests_nginx/data/log
+	docker run --rm -v `pwd`/tests_nginx:/test/data bearstech/debian rm -rf /test/data/log
 	docker-compose -f tests_nginx/docker-compose.yml up -d traefik
 	sleep 1
 	docker-compose -f tests_nginx/docker-compose.yml run -T client \
