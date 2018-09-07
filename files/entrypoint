@@ -2,11 +2,11 @@
 set -Eeo pipefail
 
 for tpl in /etc/nginx/conf.d/*.tmpl; do
-    dest=$(echo $tpl | sed 's/\.tmpl$/.conf/');
-    if [ ! -e $dest ]
+    dest=${$tpl//.tmpl$/.conf/};
+    if [ ! -e "$dest" ]
     then
         echo "envsubst $tpl => $dest"
-        envsubst < $tpl > $dest
+        envsubst < "$tpl" > "$dest"
     fi
 done
 
