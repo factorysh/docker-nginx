@@ -6,4 +6,3 @@ http:
         no-follow-redirects: false
         timeout: 1000
         body: ["<b>Hello world</b>"]
-

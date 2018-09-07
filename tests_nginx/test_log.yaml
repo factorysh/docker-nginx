@@ -1,7 +1,10 @@
 ---
 
 command:
-  "wget -O /dev/null http://glasses/beuha/aussi && sleep 2 && grep `grep $HOSTNAME /etc/hosts | cut -f 1` /data/log/access.log":
+  ? wget -O /dev/null http://glasses/beuha/aussi
+    && sleep 2
+    && grep `grep $HOSTNAME /etc/hosts | cut -f 1` /data/log/access.log
+  :
     stdout:
       - beuha/aussi
     exit-status: 0
