@@ -39,7 +39,7 @@ test: bin/goss tests_nginx/data
 	docker run --rm -v `pwd`/tests_nginx:/test/data bearstech/debian rm -rf /test/data/log
 	docker-compose -f tests_nginx/docker-compose.yml up -d traefik
 	sleep 1
-	docker-compose -f tests_nginx/docker-compose.yml run -T --use-aliases client \
+	docker-compose -f tests_nginx/docker-compose.yml run -T client \
 		goss -g nginx.yaml validate --max-concurrent 4 --format documentation
 	docker-compose -f tests_nginx/docker-compose.yml down || true
 
