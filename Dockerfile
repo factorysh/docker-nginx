@@ -9,8 +9,8 @@ RUN set -eux \
     &&  apt-get clean \
     &&  rm -rf /var/lib/apt/lists/* \
     # nginx official workaround used to redirect stuff to stdout/err
-    &&  ln -sf /dev/stdout /var/log/nginx/access.log \
-    &&  ln -sf /dev/stderr /var/log/nginx/error.log \
+    &&  ln -sf /proc/1/fd/1 /var/log/nginx/access.log \
+    &&  ln -sf /proc/1/fd/2 /var/log/nginx/error.log \
     # Unroot image stuff
     &&  mkdir /run/nginx \
     &&  chown -R www-data:www-data /run/nginx /var/lib/nginx /var/www
