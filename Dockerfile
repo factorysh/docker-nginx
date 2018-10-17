@@ -1,5 +1,4 @@
-ARG DEBIAN_DISTRO
-FROM bearstech/debian:${DEBIAN_DISTRO}
+FROM bearstech/debian:stretch
 
 RUN set -eux \
     &&  apt-get update \

@@ -4,24 +4,18 @@ all: pull build
 
 pull:
 	docker pull bearstech/debian:stretch
-	docker pull bearstech/debian:jessie
 
-build: jessie stretch
-
-jessie:
-	docker build -t bearstech/nginx:1.6 --build-arg DEBIAN_DISTRO=jessie .
+build: stretch
 
 stretch:
-	docker build -t bearstech/nginx:1.10 --build-arg DEBIAN_DISTRO=stretch .
+	docker build -t bearstech/nginx:1.10 .
 	docker tag bearstech/nginx:1.10 bearstech/nginx:latest
 
 push:
-	docker push bearstech/nginx:1.6
 	docker push bearstech/nginx:1.10
 	docker push bearstech/nginx:latest
 
 remove_image:
-	docker rmi bearstech/nginx:1.6
 	docker rmi bearstech/nginx:1.10
 	docker rmi bearstech/nginx:latest
 
