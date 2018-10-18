@@ -22,6 +22,7 @@ COPY ./files/realip.tmpl /etc/nginx/conf.d/realip.tmpl
 COPY ./files/entrypoint /usr/local/bin/entrypoint
 
 RUN chown -R www-data /etc/nginx/conf.d
+RUN chown -R www-data /var/log/nginx
 
 # Specify dedicated user, www-data
 USER www-data
