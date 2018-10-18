@@ -29,9 +29,7 @@ tests_nginx/data:
 
 test: bin/goss tests_nginx/data
 	docker-compose -f tests_nginx/docker-compose.yml down || true
-	docker run --rm -v `pwd`/tests_nginx/data:/test/data bearstech/debian chmod -R 777 /test/data
-	mkdir -p tests_nginx/data/log
-	chmod -R 777 tests_nginx/data
+	docker run --rm -v `pwd`/tests_nginx/data:/test/data bearstech/debian bash -c 'mkdir -p /test/data/log && chmod -R 777 /test/data'
 	rm -f tests_nginx/data/log/*
 	docker-compose -f tests_nginx/docker-compose.yml up -d traefik
 	sleep 1
