@@ -35,6 +35,8 @@ test: bin/goss tests_nginx/data
 	sleep 1
 	docker-compose -f tests_nginx/docker-compose.yml run -T client \
 		goss -g nginx.yaml validate --max-concurrent 4 --format documentation
+
+down:
 	docker-compose -f tests_nginx/docker-compose.yml down || true
 
-tests: test
+tests: test down
