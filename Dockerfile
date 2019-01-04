@@ -28,6 +28,8 @@ RUN chown -R www-data /var/log/nginx
 USER www-data
 
 EXPOSE 8000
+# Nginx is used behind a trusted proxy
+ENV SET_REAL_IP_FROM 0.0.0.0/0
 
 ENTRYPOINT ["entrypoint"]
 # nginx command
