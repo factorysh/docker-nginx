@@ -18,7 +18,7 @@ RUN set -eux \
 COPY ./files/nginx.conf /etc/nginx/nginx.conf
 COPY ./files/default /etc/nginx/sites-enabled/
 COPY ./files/test.html /var/www/html/
-COPY ./files/realip.tmpl /etc/nginx/conf.d/realip.tmpl
+COPY ./files/realip.conf /etc/nginx/conf.d/realip.conf
 COPY ./files/entrypoint /usr/local/bin/entrypoint
 
 RUN chown -R www-data /etc/nginx/conf.d
