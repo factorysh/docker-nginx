@@ -1,5 +1,7 @@
 FROM bearstech/debian:stretch
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN set -eux \
     &&  apt-get update \
     &&  apt-get install -y --no-install-recommends \
@@ -18,7 +20,7 @@ RUN set -eux \
 COPY ./files/nginx.conf /etc/nginx/nginx.conf
 COPY ./files/default /etc/nginx/sites-enabled/
 COPY ./files/test.html /var/www/html/
-COPY ./files/realip.tmpl /etc/nginx/conf.d/realip.tmpl
+COPY ./files/realip.conf /etc/nginx/conf.d/realip.conf
 COPY ./files/entrypoint /usr/local/bin/entrypoint
 
 RUN chown -R www-data /etc/nginx/conf.d
@@ -28,8 +30,6 @@ RUN chown -R www-data /var/log/nginx
 USER www-data
 
 EXPOSE 8000
-# Nginx is used behind a trusted proxy
-ENV SET_REAL_IP_FROM 0.0.0.0/0
 
 ENTRYPOINT ["entrypoint"]
 # nginx command
