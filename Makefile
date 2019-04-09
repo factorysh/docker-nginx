@@ -1,14 +1,16 @@
 GOSS_VERSION := 0.3.5
+GIT_VERSION := $(shell git rev-parse HEAD)
 
 all: pull build
 
 pull:
 	docker pull bearstech/debian:stretch
 
-build: stretch
-
-stretch:
-	docker build -t bearstech/nginx:1.10 .
+build:
+	docker build \
+		--build-arg GIT_VERSION=${GIT_VERSION} \
+		-t bearstech/nginx:1.10 \
+		.
 	docker tag bearstech/nginx:1.10 bearstech/nginx:latest
 
 push:
