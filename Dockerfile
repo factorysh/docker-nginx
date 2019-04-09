@@ -30,6 +30,9 @@ RUN chown -R www-data /var/log/nginx
 USER www-data
 
 EXPOSE 8000
+ARG GIT_VERSION
+LABEL com.bearstech.source.nginx=https://github.com/factorysh/docker-nginx/commit/${GIT_VERSION}
+
 
 ENTRYPOINT ["entrypoint"]
 # nginx command
