@@ -33,6 +33,9 @@ EXPOSE 8000
 ARG GIT_VERSION
 LABEL com.bearstech.source.nginx=https://github.com/factorysh/docker-nginx/commit/${GIT_VERSION}
 
+ARG GIT_DATE
+LABEL com.bearstech.date.nginx=${GIT_DATE}
+
 
 ENTRYPOINT ["entrypoint"]
 # nginx command
