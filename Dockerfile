@@ -30,13 +30,25 @@ RUN chown -R www-data /var/log/nginx
 USER www-data
 
 EXPOSE 8000
-ARG GIT_VERSION
-LABEL com.bearstech.source.nginx=https://github.com/factorysh/docker-nginx/commit/${GIT_VERSION}
 
-ARG GIT_DATE
-LABEL com.bearstech.date.nginx=${GIT_DATE}
 
 
 ENTRYPOINT ["entrypoint"]
 # nginx command
 CMD ["nginx", "-g", "daemon off;"]
+
+# generated labels
+
+ARG GIT_VERSION
+ARG GIT_DATE
+ARG BUILD_DATE
+
+LABEL com.bearstech.image.revision_date=${GIT_DATE}
+
+LABEL org.opencontainers.image.authors=Bearstech
+
+LABEL org.opencontainers.image.revision=${GIT_VERSION}
+LABEL org.opencontainers.image.created=${BUILD_DATE}
+
+LABEL org.opencontainers.image.url=https://github.com/factorysh/docker-nginx
+LABEL org.opencontainers.image.source=https://github.com/factorysh/docker-nginx/blob/${GIT_VERSION}/Dockerfile
