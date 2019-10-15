@@ -1,0 +1,14 @@
+
+# common vars used during build
+
+GIT_VERSION := $(shell git rev-parse HEAD)
+
+GIT_DATE := $(shell LC_ALL=C git show -s --date=local --format=%cI HEAD | sed 's/T/ /')
+
+BUILD_DATE := $(shell LC_ALL=C date --utc --rfc-3339=seconds)
+
+DOCKER_BUILD_ARGS = \
+	--build-arg GIT_REPO="${GIT_REPO}" \
+	--build-arg GIT_VERSION="${GIT_VERSION}" \
+	--build-arg GIT_DATE="${GIT_DATE}" \
+	--build-arg BUILD_DATE="${BUILD_DATE}" \
