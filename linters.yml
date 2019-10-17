@@ -1,0 +1,20 @@
+---
+
+shellcheck:
+    include:
+        - "*.sh"
+
+yamllint:
+    include:
+        - "*.yaml"
+        - "*.yml"
+
+hadolint:
+    include:
+        - "Dockerfile*"
+    # extra options to pass to hadolint binary
+    options:
+        - "--ignore=DL3008"
+        - "--ignore=DL3013"
+        - "--ignore=DL3016"
+        - "--ignore=DL3028"

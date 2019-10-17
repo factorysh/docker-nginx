@@ -1,0 +1,8 @@
+
+lint:
+	docker run \
+		--rm -u $(shell id -u) \
+		-v $(HOME)/.cache:/.cache \
+		-v $(shell pwd):/docker-nginx \
+		-w /docker-nginx \
+		bearstech/lint

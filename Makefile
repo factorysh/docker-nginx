@@ -1,4 +1,5 @@
 
+include Makefile.lint
 include Makefile.build_args
 
 GOSS_VERSION := 0.3.5
