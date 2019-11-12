@@ -6,7 +6,7 @@ services:
         image: bearstech/traefik-dev:2.0
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
-        links:
+        depends_on:
             - web
         expose:
             - 80
@@ -19,7 +19,7 @@ services:
             - ./data/log:/var/log/nginx
         expose:
             - '8000'
-        links:
+        depends_on:
             - mirror
         labels:
             traefik.http.routers.nginxRouter.rule: Host(`traefik`, `glasses`)
@@ -34,7 +34,7 @@ services:
             - ../tests_nginx:/goss
             - ./data/log:/data/log
         working_dir: /goss
-        links:
+        depends_on:
             - web
             - traefik
             - traefik:glasses
