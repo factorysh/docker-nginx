@@ -8,7 +8,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
         links:
             - web
-        ports:
+        expose:
             - 80
 
     web:
@@ -17,7 +17,7 @@ services:
             - ./index.html:/var/www/html/index.html
             - ./nginx_mirror.conf:/etc/nginx/sites-enabled/mirror
             - ./data/log:/var/log/nginx
-        ports:
+        expose:
             - '8000'
         links:
             - mirror
