@@ -22,7 +22,7 @@ services:
         depends_on:
             - mirror
         labels:
-            traefik.http.routers.nginxRouter.rule: Host(`traefik`, `glasses`)
+            traefik.http.routers.nginxWebRouter.rule: Host(`traefik`, `glasses`)
 
     mirror:
         image: bearstech/http-mirror
@@ -32,9 +32,9 @@ services:
         volumes:
             - ../bin/goss:/usr/bin/goss
             - ../tests_nginx:/goss
+            - ../traefik_hosts:/etc/hosts
             - ./data/log:/data/log
         working_dir: /goss
         depends_on:
             - web
             - traefik
-            - traefik:glasses
