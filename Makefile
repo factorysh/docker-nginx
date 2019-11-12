@@ -37,7 +37,7 @@ test: bin/goss tests_nginx/data
 	docker run --rm -v `pwd`/tests_nginx/data:/test/data bearstech/debian bash -c 'mkdir -p /test/data/log && chmod -R 777 /test/data'
 	rm -f tests_nginx/data/log/*
 	docker-compose -f tests_nginx/docker-compose.yml up -d traefik
-	sleep 1
+	docker-compose -f tests_nginx/docker-compose.yml exec -T traefik wait_for_services -vd 2 --timeout 120
 	docker-compose -f tests_nginx/docker-compose.yml run -T client \
 		goss -g nginx.yaml validate --max-concurrent 4 --format documentation
 
