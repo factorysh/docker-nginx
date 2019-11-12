@@ -41,7 +41,7 @@ test: bin/goss tests_nginx/data
 	docker-compose -f tests_nginx/docker-compose.yml exec -T traefik \
 		wait_for_services -vd 2 --timeout 120
 	docker-compose -f tests_nginx/docker-compose.yml exec -T traefik \
-		traefik_hosts > traefik_hosts
+		traefik_hosts > tests_nginx/traefik_hosts
 	docker-compose -f tests_nginx/docker-compose.yml run -T client \
 		goss -g nginx.yaml validate --max-concurrent 4 --format documentation
 

@@ -32,8 +32,8 @@ services:
         volumes:
             - ../bin/goss:/usr/bin/goss
             - ../tests_nginx:/goss
-            - ../traefik_hosts:/etc/hosts
             - ./data/log:/data/log
+            - ./traefik_hosts:/etc/hosts
         working_dir: /goss
         depends_on:
             - web
