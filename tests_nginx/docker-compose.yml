@@ -22,6 +22,7 @@ services:
         depends_on:
             - mirror
         labels:
+            traefik.enable: 'true'
             traefik.http.routers.nginxWebRouter.rule: Host(`traefik`, `glasses`)
 
     mirror:
