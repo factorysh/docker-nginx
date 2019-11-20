@@ -1,7 +1,7 @@
 ---
 
 http:
-    http://traefik/:
+    http://traefik-nginx/:
         status: 200
         no-follow-redirects: false
         timeout: 1000
