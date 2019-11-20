@@ -23,7 +23,8 @@ services:
             - mirror
         labels:
             traefik.enable: 'true'
-            traefik.http.routers.nginxWebRouter.rule: Host(`traefik-nginx`, `glasses`)
+            traefik.http.routers.nginxWebRouter.rule: >
+                Host(`traefik-nginx`, `glasses`)
 
     mirror:
         image: bearstech/http-mirror
