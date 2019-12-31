@@ -12,7 +12,7 @@ services:
             - 80
 
     web:
-        image: bearstech/nginx:latest
+        image: bearstech/nginx:${DEBIAN_VERSION}
         volumes:
             - ./index.html:/var/www/html/index.html
             - ./nginx_mirror.conf:/etc/nginx/sites-enabled/mirror
@@ -28,15 +28,18 @@ services:
 
     mirror:
         image: bearstech/http-mirror
+        expose:
+            - '5000'
 
     client:
-        image: bearstech/debian:stretch
+        image: bearstech/debian:buster
         volumes:
             - ../bin/goss:/usr/bin/goss
             - ../tests_nginx:/goss
             - ./data/log:/data/log
             - ./traefik_hosts:/etc/hosts
         working_dir: /goss
+        command: sleep 3600000
         depends_on:
             - web
             - traefik
