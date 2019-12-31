@@ -58,7 +58,7 @@ test-stretch:
 	rm -f tests_nginx/data/log/* tests_nginx/traefik_hosts
 	touch tests_nginx/traefik_hosts
 	DEBIAN_VERSION=stretch \
-		docker-compose -f tests_nginx/docker-compose.yml up -d traefik
+		docker-compose -f tests_nginx/docker-compose.yml up -d
 	DEBIAN_VERSION=stretch \
 		docker-compose -f tests_nginx/docker-compose.yml exec -T traefik \
 			wait_for_services -vd 2 --timeout 120
@@ -66,7 +66,7 @@ test-stretch:
 		docker-compose -f tests_nginx/docker-compose.yml exec -T traefik \
 			traefik_hosts > tests_nginx/traefik_hosts
 	DEBIAN_VERSION=stretch \
-		docker-compose -f tests_nginx/docker-compose.yml run -T client \
+		docker-compose -f tests_nginx/docker-compose.yml exec -T client \
 			goss -g nginx.yaml validate --max-concurrent 4 --format documentation
 
 test-buster:
@@ -76,7 +76,7 @@ test-buster:
 	rm -f tests_nginx/data/log/* tests_nginx/traefik_hosts
 	touch tests_nginx/traefik_hosts
 	DEBIAN_VERSION=buster \
-		docker-compose -f tests_nginx/docker-compose.yml up -d traefik
+		docker-compose -f tests_nginx/docker-compose.yml up -d
 	DEBIAN_VERSION=buster \
 		docker-compose -f tests_nginx/docker-compose.yml exec -T traefik \
 			wait_for_services -vd 2 --timeout 120
@@ -84,7 +84,7 @@ test-buster:
 		docker-compose -f tests_nginx/docker-compose.yml exec -T traefik \
 			traefik_hosts > tests_nginx/traefik_hosts
 	DEBIAN_VERSION=buster \
-		docker-compose -f tests_nginx/docker-compose.yml run -T client \
+		docker-compose -f tests_nginx/docker-compose.yml exec -T client \
 			goss -g nginx.yaml validate --max-concurrent 4 --format documentation
 
 down:
