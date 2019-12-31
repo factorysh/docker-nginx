@@ -1,4 +1,6 @@
-FROM bearstech/debian:stretch
+ARG DEBIAN_VERSION
+
+FROM bearstech/debian:${DEBIAN_VERSION}
 
 ENV DEBIAN_FRONTEND noninteractive
 

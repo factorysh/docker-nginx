@@ -12,7 +12,7 @@ services:
             - 80
 
     web:
-        image: bearstech/nginx:latest
+        image: bearstech/nginx:${DEBIAN_VERSION}
         volumes:
             - ./index.html:/var/www/html/index.html
             - ./nginx_mirror.conf:/etc/nginx/sites-enabled/mirror
