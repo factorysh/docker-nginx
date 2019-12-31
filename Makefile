@@ -51,7 +51,9 @@ tests_nginx/data:
 
 test: bin/goss test-stretch test-buster
 
-test-stretch: down tests_nginx/data
+test-stretch:
+	docker-compose -f tests_nginx/docker-compose.yml down || true
+	rm -Rf tests_nginx/data && mkdir tests_nginx/data
 	docker run --rm -v `pwd`/tests_nginx/data:/test/data bearstech/debian bash -c 'mkdir -p /test/data/log && chmod -R 777 /test/data'
 	rm -f tests_nginx/data/log/* tests_nginx/traefik_hosts
 	touch tests_nginx/traefik_hosts
@@ -67,7 +69,9 @@ test-stretch: down tests_nginx/data
 		docker-compose -f tests_nginx/docker-compose.yml run -T client \
 			goss -g nginx.yaml validate --max-concurrent 4 --format documentation
 
-test-buster: down tests_nginx/data
+test-buster:
+	docker-compose -f tests_nginx/docker-compose.yml down || true
+	rm -Rf tests_nginx/data && mkdir tests_nginx/data
 	docker run --rm -v `pwd`/tests_nginx/data:/test/data bearstech/debian bash -c 'mkdir -p /test/data/log && chmod -R 777 /test/data'
 	rm -f tests_nginx/data/log/* tests_nginx/traefik_hosts
 	touch tests_nginx/traefik_hosts

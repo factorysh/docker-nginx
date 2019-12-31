@@ -30,13 +30,14 @@ services:
         image: bearstech/http-mirror
 
     client:
-        image: bearstech/debian:stretch
+        image: bearstech/debian:buster
         volumes:
             - ../bin/goss:/usr/bin/goss
             - ../tests_nginx:/goss
             - ./data/log:/data/log
             - ./traefik_hosts:/etc/hosts
         working_dir: /goss
+        restart: "no"
         depends_on:
             - web
             - traefik
