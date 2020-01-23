@@ -1,8 +1,6 @@
 
 # common vars used during build
 
-GIT_REPO := https://github.com/factorysh/$(shell basename $(shell pwd)).git
-
 GIT_VERSION := $(shell git rev-parse HEAD)
 
 GIT_DATE := $(shell LC_ALL=C git show -s --date=local --format=%cI HEAD | sed 's/T/ /')
