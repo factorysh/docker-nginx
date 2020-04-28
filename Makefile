@@ -31,6 +31,13 @@ build-buster:
 	# debian tag is only locals, to ease tests
 	docker tag bearstech/nginx:1.14 bearstech/nginx:buster
 
+build-brotli:
+	 docker build \
+		$(DOCKER_BUILD_ARGS) \
+		-t bearstech/nginx-brotli \
+		-f Dockerfile.brotli \
+		.
+
 push:
 	docker push bearstech/nginx:1.10
 	docker push bearstech/nginx:1.14
