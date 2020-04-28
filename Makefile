@@ -41,6 +41,13 @@ build-bullseye:
 	docker tag bearstech/nginx:1.18 bearstech/nginx:bullseye
 	docker tag bearstech/nginx:1.18 bearstech/nginx:latest
 
+build-brotli:
+	 docker build \
+		$(DOCKER_BUILD_ARGS) \
+		-t bearstech/nginx-brotli \
+		-f Dockerfile.brotli \
+		.
+
 push:
 	docker push bearstech/nginx:1.10
 	docker push bearstech/nginx:1.14
