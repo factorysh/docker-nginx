@@ -3,6 +3,7 @@ include Makefile.lint
 include Makefile.build_args
 
 GOSS_VERSION := 0.3.5
+NGX_BROTLI_VERSION := 25f86f0bac1101b6512135eac5f93c49c63609e3
 
 all: pull build
 
@@ -44,6 +45,7 @@ build-bullseye:
 build-brotli:
 	 docker build \
 		$(DOCKER_BUILD_ARGS) \
+		--build-arg NGX_BROTLI_VERSION=${NGX_BROTLI_VERSION} \
 		-t bearstech/nginx-brotli \
 		-f Dockerfile.brotli \
 		.
