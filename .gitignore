@@ -1,3 +1,4 @@
 bin
 tests_nginx/data/
+tests_modules/data/
 tests_nginx/traefik_hosts
