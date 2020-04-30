@@ -1,0 +1,20 @@
+---
+
+version: '3'
+services:
+    web:
+        image: bearstech/nginx-brotli
+        volumes:
+            - ./www:/var/www/html
+            - ./nginx_brotli.conf:/etc/nginx/sites-enabled/default
+
+    client:
+        image: bearstech/debian:buster
+        volumes:
+            - ../bin/goss:/usr/bin/goss
+            - ../tests_modules:/goss
+            - ./data/log:/data/log
+        working_dir: /goss
+        depends_on:
+            - web
+
