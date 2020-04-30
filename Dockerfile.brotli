@@ -32,7 +32,7 @@ USER root
 COPY --from=src /usr/local/src/nginx-1.14.2/debian/build-full/objs/ngx_http_brotli_filter_module.so /usr/share/nginx/modules/
 COPY --from=src /usr/local/src/nginx-1.14.2/debian/build-full/objs/ngx_http_brotli_static_module.so /usr/share/nginx/modules/
 COPY ./files/mod-brotli.conf /etc/nginx/modules-available/mod-brotli.conf
-RUN ln -s /etc/nginx/modules-available/mod-brotli.conf /etc/nginx/modules-enabled/mod-brotli.conf
+RUN ln -s /etc/nginx/modules-available/mod-brotli.conf /etc/nginx/modules-enabled/50-mod-brotli.conf
 
 USER www-data
 
