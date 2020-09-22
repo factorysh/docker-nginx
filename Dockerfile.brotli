@@ -15,6 +15,7 @@ RUN set -eux \
     &&  rm -rf /var/lib/apt/lists/*
 
 ARG NGX_BROTLI_VERSION
+# hadolint ignore=DL3003
 RUN git clone --recurse-submodules https://github.com/google/ngx_brotli.git ngx_brotli \
         && cd ngx_brotli && git checkout ${NGX_BROTLI_VERSION} && git submodule update
 
