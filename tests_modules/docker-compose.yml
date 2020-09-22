@@ -17,4 +17,3 @@ services:
         working_dir: /goss
         depends_on:
             - web
-
