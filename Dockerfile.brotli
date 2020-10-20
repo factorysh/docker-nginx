@@ -1,0 +1,52 @@
+FROM bearstech/debian-dev:10 as src
+
+WORKDIR /usr/local/src
+RUN set -eux \
+    &&  apt-get update \
+    &&  apt-get install -y --no-install-recommends \
+                nginx-light \
+                python3 \
+                apt-src \
+    && echo "deb-src http://ftp.fr.debian.org/debian/ buster         main contrib" > /etc/apt/sources.list.d/source.list \
+    && apt-src update \
+    && apt-src install nginx-light \
+    && apt-src build nginx-light \
+    &&  apt-get clean \
+    &&  rm -rf /var/lib/apt/lists/*
+
+ARG NGX_BROTLI_VERSION
+# hadolint ignore=DL3003
+RUN git clone --recurse-submodules https://github.com/google/ngx_brotli.git ngx_brotli \
+        && cd ngx_brotli && git checkout ${NGX_BROTLI_VERSION} && git submodule update
+
+COPY files/nginx_flags.py /usr/local/bin/
+
+WORKDIR /usr/local/src/nginx-1.14.2/debian/build-full
+
+RUN bash -c "./configure $(nginx_flags.py) --add-dynamic-module=/usr/local/src/ngx_brotli" \
+    && make modules
+
+FROM  bearstech/nginx:1.14
+
+USER root
+
+COPY --from=src /usr/local/src/nginx-1.14.2/debian/build-full/objs/ngx_http_brotli_filter_module.so /usr/share/nginx/modules/
+COPY --from=src /usr/local/src/nginx-1.14.2/debian/build-full/objs/ngx_http_brotli_static_module.so /usr/share/nginx/modules/
+COPY ./files/mod-brotli.conf /etc/nginx/modules-available/mod-brotli.conf
+RUN ln -s /etc/nginx/modules-available/mod-brotli.conf /etc/nginx/modules-enabled/50-mod-brotli.conf
+
+USER www-data
+
+# generated labels
+
+ARG GIT_VERSION
+ARG GIT_DATE
+ARG BUILD_DATE
+
+LABEL \
+    com.bearstech.image.revision_date=${GIT_DATE} \
+    org.opencontainers.image.authors=Bearstech \
+    org.opencontainers.image.revision=${GIT_VERSION} \
+    org.opencontainers.image.created=${BUILD_DATE} \
+    org.opencontainers.image.url=https://github.com/factorysh/docker-nginx \
+    org.opencontainers.image.source=https://github.com/factorysh/docker-nginx/blob/${GIT_VERSION}/Dockerfile

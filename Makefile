@@ -2,7 +2,8 @@
 include Makefile.lint
 include Makefile.build_args
 
-GOSS_VERSION := 0.3.5
+GOSS_VERSION := 0.3.10
+NGX_BROTLI_VERSION := 25f86f0bac1101b6512135eac5f93c49c63609e3
 
 all: pull build
 
@@ -30,6 +31,14 @@ build-buster:
 		.
 	# debian tag is only locals, to ease tests
 	docker tag bearstech/nginx:1.14 bearstech/nginx:buster
+
+build-brotli:
+	 docker build \
+		$(DOCKER_BUILD_ARGS) \
+		--build-arg NGX_BROTLI_VERSION=${NGX_BROTLI_VERSION} \
+		-t bearstech/nginx-brotli \
+		-f Dockerfile.brotli \
+		.
 
 push:
 	docker push bearstech/nginx:1.10
@@ -86,6 +95,14 @@ test-buster:
 	DEBIAN_VERSION=buster \
 		docker-compose -f tests_nginx/docker-compose.yml exec -T client \
 			goss -g nginx.yaml validate --max-concurrent 4 --format documentation
+
+test-brotli:
+	mkdir -p tests_modules/data
+	docker-compose -f tests_modules/docker-compose.yml down || true
+	docker-compose -f tests_modules/docker-compose.yml up -d web
+	docker-compose -f tests_modules/docker-compose.yml run -T client \
+		goss -g brotli.yaml validate --max-concurrent 4 --format documentation
+	docker-compose -f tests_modules/docker-compose.yml down
 
 down:
 	docker-compose -f tests_nginx/docker-compose.yml down || true

@@ -1,0 +1,10 @@
+---
+
+http:
+  http://web:8000/Blason_province_fr_Dauphine.svg:
+    status: 200
+    request-headers:
+      - "Accept-Encoding: br"
+    headers:
+      - "Content-Encoding: br"
+    timeout: 1000
