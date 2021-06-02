@@ -19,7 +19,6 @@ build-stretch:
 		--build-arg=DEBIAN_VERSION=stretch \
 		-t bearstech/nginx:1.10 \
 		.
-	docker tag bearstech/nginx:1.10 bearstech/nginx:latest
 	# debian tag is only locals, to ease tests
 	docker tag bearstech/nginx:1.10 bearstech/nginx:stretch
 
@@ -40,16 +39,16 @@ build-bullseye:
 		.
 	# debian tag is only locals, to ease tests
 	docker tag bearstech/nginx:1.18 bearstech/nginx:bullseye
+	docker tag bearstech/nginx:1.18 bearstech/nginx:latest
 
 push:
 	docker push bearstech/nginx:1.10
 	docker push bearstech/nginx:1.14
+	docker push bearstech/nginx:1.18
 	docker push bearstech/nginx:latest
 
 remove_image:
-	docker rmi bearstech/nginx:1.10
-	docker rmi bearstech/nginx:1.14
-	docker rmi bearstech/nginx:latest
+	docker rmi -f $(shell docker images -q --filter="reference=bearstech/nginx")
 
 bin/goss:
 	mkdir -p bin
