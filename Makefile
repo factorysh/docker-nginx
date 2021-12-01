@@ -61,7 +61,7 @@ tests_nginx/data:
 test: bin/goss test-stretch test-buster test-bullseye
 
 test-stretch:
-	docker-compose -f tests_nginx/docker-compose.yml down || true
+	DEBIAN_VERSION=stretch docker-compose -f tests_nginx/docker-compose.yml down || true
 	rm -Rf tests_nginx/data && mkdir tests_nginx/data
 	docker run --rm -v `pwd`/tests_nginx/data:/test/data bearstech/debian:buster bash -c 'mkdir -p /test/data/log && chmod -R 777 /test/data'
 	rm -f tests_nginx/data/log/* tests_nginx/traefik_hosts
@@ -79,7 +79,7 @@ test-stretch:
 			goss -g nginx.yaml validate --max-concurrent 4 --format documentation
 
 test-buster:
-	docker-compose -f tests_nginx/docker-compose.yml down || true
+	DEBIAN_VERSION=buster docker-compose -f tests_nginx/docker-compose.yml down || true
 	rm -Rf tests_nginx/data && mkdir tests_nginx/data
 	docker run --rm -v `pwd`/tests_nginx/data:/test/data bearstech/debian:buster bash -c 'mkdir -p /test/data/log && chmod -R 777 /test/data'
 	rm -f tests_nginx/data/log/* tests_nginx/traefik_hosts
@@ -97,7 +97,7 @@ test-buster:
 			goss -g nginx.yaml validate --max-concurrent 4 --format documentation
 
 test-bullseye:
-	docker-compose -f tests_nginx/docker-compose.yml down || true
+	DEBIAN_VERSION=bullseye docker-compose -f tests_nginx/docker-compose.yml down || true
 	rm -Rf tests_nginx/data && mkdir tests_nginx/data
 	docker run --rm -v `pwd`/tests_nginx/data:/test/data bearstech/debian:bullseye bash -c 'mkdir -p /test/data/log && chmod -R 777 /test/data'
 	rm -f tests_nginx/data/log/* tests_nginx/traefik_hosts
