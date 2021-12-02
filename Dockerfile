@@ -26,8 +26,8 @@ COPY ./files/test.html /var/www/html/
 COPY ./files/realip.conf /etc/nginx/conf.d/realip.conf
 COPY ./files/entrypoint /usr/local/bin/entrypoint
 
-RUN chown -R www-data /etc/nginx/conf.d
-RUN chown -R www-data /var/log/nginx
+RUN chown -R www-data /etc/nginx/conf.d \
+    &&  chown -R www-data /var/log/nginx
 
 # Specify dedicated user, www-data
 USER www-data
@@ -46,8 +46,7 @@ ARG GIT_VERSION
 ARG GIT_DATE
 ARG BUILD_DATE
 
-LABEL \
-    com.bearstech.image.revision_date=${GIT_DATE} \
+LABEL com.bearstech.image.revision_date=${GIT_DATE} \
     org.opencontainers.image.authors=Bearstech \
     org.opencontainers.image.revision=${GIT_VERSION} \
     org.opencontainers.image.created=${BUILD_DATE} \
